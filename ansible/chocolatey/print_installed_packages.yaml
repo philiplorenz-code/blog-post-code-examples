@@ -1,0 +1,10 @@
+---
+- name: Print installed packages
+  hosts: windows
+  tasks:
+    - name: gather facts
+      win_chocolatey_facts: 
+      register: list_packages
+    - name: print data
+      debug: 
+        var: list_packages.ansible_facts.ansible_chocolatey.packages
