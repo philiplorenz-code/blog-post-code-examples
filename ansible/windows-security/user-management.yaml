@@ -1,0 +1,21 @@
+#user-management.yaml
+---
+- name: User Management Tasks
+  hosts: windows
+  tasks:
+    - name: Ensure user exists
+      ansible.windows.win_user:
+        name: USERNAME
+        password: PASSWORD
+        groups:
+          - Administrators
+        state: present
+# Dieser Task stellt sicher, dass der Benutzer "USERNAME" existiert 
+# und ihm das Passwort "PASSWORD" sowie die Mitgliedschaft
+# in der Administratorengruppe zugewiesen wird
+    - name: Change the guest account name
+      community.windows.win_security_policy:
+        section: System Access
+        key: NewGuestName
+        value: Guest Acc
+# Dieser Task ändert den Namen des Gastkontos in "Guest Acc".
