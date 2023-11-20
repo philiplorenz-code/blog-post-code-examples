@@ -1,0 +1,6 @@
+---
+- import_playbook: playbooks/user-creation.yaml
+- import_playbook: playbooks/file-transfer.yaml
+- import_playbook: playbooks/software.yaml
+- import_playbook: playbooks/firewall.yaml
+- import_playbook: playbooks/safeerp-service.yaml

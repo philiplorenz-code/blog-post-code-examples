@@ -1,0 +1,33 @@
+
+---
+- name: Setup SafeERP User and File Management
+  hosts: win
+  vars_files:
+    - ../vars/general_vars.yaml
+  tasks:
+    - name: Create base and logs directories
+      win_file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - "{{ base_path }}"
+        - "{{ logs_path }}"
+
+    - name: Set permissions for base directory
+      win_acl:
+        path: "{{ base_path }}"
+        user: "{{ user }}"
+        rights: FullControl
+        type: allow
+        state: present
+
+    - name: Copy SafeERP executable to target
+      win_copy:
+        src: ../assets/SafeERP.exe
+        dest: "{{ exe_path }}"
+
+    - name: Enable inheritance for base directory
+      ansible.windows.win_acl_inheritance:
+        path: "{{ base_path }}"
+        state: present
+        reorganize: true

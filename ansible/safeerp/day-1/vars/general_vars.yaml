@@ -1,0 +1,24 @@
+---
+# SafeERP Service
+service_name: SafeERP_App
+service_path: C:\SafeERP\SafeERP.exe
+display_name: SafeERP Application Service
+service_description: Application Service for SafeERP
+
+# Software to be installed
+software_packages:
+  - 7zip
+  - jdk8
+
+# Firewall rules
+firewall_rules:
+  - { name: "HTTP", localport: 80 }
+  - { name: "HTTPS", localport: 443 }
+  - { name: "SafeERP 8443", localport: 8443 }
+
+# Filetransfer and usercreation
+base_path: C:\\SafeERP
+logs_path: "{{ base_path }}\\Logs"
+exe_path: "{{ base_path }}\\SafeERP.exe"
+user: SafeERPUser
+userpass: SicheresPasswort123!

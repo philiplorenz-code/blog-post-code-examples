@@ -1,0 +1,13 @@
+---
+- name: Setup default Software
+  hosts: win
+  tasks:
+  - name: Create a new service with extra details
+    ansible.windows.win_service:
+      name: SafeERP_App
+      path: C:\SafeERP\SafeERP.exe
+      display_name: SafeERP Application Service
+      description: Application Service for SafeERP
+      start_mode: auto
+      failure_actions:
+      - type: restart

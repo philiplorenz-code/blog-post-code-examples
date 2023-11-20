@@ -1,0 +1,33 @@
+---
+- name: Configure Firewall for SafeERP
+  hosts: win
+  tasks:
+    - name: Open HTTP port 80
+      win_firewall_rule:
+        name: "HTTP"
+        localport: 80
+        action: allow
+        direction: In
+        protocol: TCP
+        enable: yes
+        profile: Domain
+
+    - name: Open HTTPS port 443
+      win_firewall_rule:
+        name: "HTTPS"
+        localport: 443
+        action: allow
+        direction: In
+        protocol: TCP
+        enable: yes
+        profile: Domain
+
+    - name: Open port 8443 for SafeERP
+      win_firewall_rule:
+        name: "SafeERP 8443"
+        localport: 8443
+        action: allow
+        direction: In
+        protocol: TCP
+        enable: yes
+        profile: Domain

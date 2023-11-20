@@ -1,0 +1,17 @@
+
+---
+- name: Configure Firewall for SafeERP
+  hosts: win
+  vars_files:
+    - ../vars/general_vars.yaml
+  tasks:
+    - name: Open ports for specified rules
+      win_firewall_rule:
+        name: "{{ item.name }}"
+        localport: "{{ item.localport }}"
+        action: allow
+        direction: In
+        protocol: TCP
+        enable: yes
+        profile: Domain
+      loop: "{{ firewall_rules }}"

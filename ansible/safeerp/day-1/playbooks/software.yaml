@@ -1,0 +1,12 @@
+
+---
+- name: Setup default Software
+  hosts: win
+  vars_files:
+    - ../vars/general_vars.yaml
+  tasks:
+    - name: Install software with Chocolatey
+      win_chocolatey:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ software_packages }}"

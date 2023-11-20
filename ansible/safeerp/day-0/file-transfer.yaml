@@ -1,0 +1,32 @@
+---
+- name: Setup SafeERP User and File Management
+  hosts: win
+  tasks:
+    - name: Create directory C:\SafeERP\
+      win_file:
+        path: C:\SafeERP\
+        state: directory
+
+    - name: Set permissions for C:\SafeERP\
+      win_acl:
+        path: C:\SafeERP\
+        user: SafeERPUser
+        rights: FullControl
+        type: allow
+        state: present
+
+    - name: Create Logs directory under C:\SafeERP\
+      win_file:
+        path: C:\SafeERP\Logs
+        state: directory
+
+    - name: Copy SafeERP executable to target
+      win_copy:
+        src: ./SafeERP.exe
+        dest: C:\SafeERP\SafeERP.exe
+
+    - name: Enable inheritance for C:\SafeERP\
+      ansible.windows.win_acl_inheritance:
+        path: C:\SafeERP\
+        state: present
+        reorganize: true

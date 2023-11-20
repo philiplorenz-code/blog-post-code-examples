@@ -1,0 +1,10 @@
+---
+- name: Setup SafeERP User and File Management
+  hosts: win
+  tasks:
+    - name: Create SafeERP user
+      win_user:
+        name: SafeERPUser
+        password: SicheresPasswort123!
+        state: present
+        

@@ -1,0 +1,12 @@
+---
+- name: Setup SafeERP User and File Management
+  hosts: win
+  vars_files:
+    - ../vars/general_vars.yaml
+  tasks:
+    - name: Create SafeERP user
+      win_user:
+        name: "{{ user }}"
+        password: "{{ userpass }}"
+        state: present
+        

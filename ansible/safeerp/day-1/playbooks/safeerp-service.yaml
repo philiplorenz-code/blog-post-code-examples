@@ -1,0 +1,16 @@
+
+---
+- name: Setup default Software
+  hosts: win
+  vars_files:
+    - ../vars/general_vars.yaml
+  tasks:
+    - name: Create a new service with extra details
+      ansible.windows.win_service:
+        name: "{{ service_name }}"
+        path: "{{ service_path }}"
+        display_name: "{{ display_name }}"
+        description: "{{ service_description }}"
+        start_mode: auto
+        failure_actions:
+          - type: restart
